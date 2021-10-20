@@ -275,6 +275,7 @@ open class BaseRepository {
 Part 2 에서는 위 방식으로 구현했을 때 DI로 주입한 오브젝트들의 재사용성과 메모리 효율성에 대해 알아보려고 합니다.
 감사합니다.
 
+## 참고 자료
 https://narendrasinhdodiya.medium.com/android-architecture-mvvm-with-coroutines-retrofit-hilt-kotlin-flow-room-48e67ca3b2c8  
 https://namget.tistory.com/entry/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-Clean-Architecture  
 https://leveloper.tistory.com/205  
