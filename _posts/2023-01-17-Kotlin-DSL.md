@@ -38,12 +38,12 @@ DSL은 Domain-Specific Language로써 특정 영역에 대한 연산 및 작업�
         // 이전
         buildscript {
             repositories {
-        			mavenCentral()
-        			google()
-        			mavenCentral()
-        			gradlePluginPortal()
+                mavenCentral()
+                google()
+                mavenCentral()
+                gradlePluginPortal()
             }
-        
+
             dependencies {
                 classpath 'com.android.tools.build:gradle:7.2.2'
                 classpath 'com.google.gms:google-services:4.3.13'
@@ -53,17 +53,17 @@ DSL은 Domain-Specific Language로써 특정 영역에 대한 연산 및 작업�
         
         // 변경
         buildscript {
-        	repositories {
-        		google()
-        		mavenCentral()
-        		gradlePluginPortal()
-        	}
+            repositories {
+                google()
+                mavenCentral()
+                gradlePluginPortal()
+            }
         
-        	dependencies {
-        			classpath("com.android.tools.build:gradle:7.2.2")
-        	    classpath("com.google.gms:google-services:4.3.13")
-        	    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21")
-        	}
+            dependencies {
+                classpath("com.android.tools.build:gradle:7.2.2")
+                classpath("com.google.gms:google-services:4.3.13")
+                classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21")
+            }
         }
         ```
         
@@ -73,21 +73,21 @@ DSL은 Domain-Specific Language로써 특정 영역에 대한 연산 및 작업�
         // 기존
         allprojects {
             repositories {
-        				mavenCentral()
+                mavenCentral()
                 google()
-        				gradlePluginPortal()
+                gradlePluginPortal()
                 maven { url 'https://maven.google.com' }
             }
         }
         
         // 변경
         allprojects {
-        	repositories {
-        			mavenCentral()
-              google()
-        			gradlePluginPortal()
-              maven { url 'https://maven.google.com' }
-        	}
+            repositories {
+                mavenCentral()
+                google()
+                gradlePluginPortal()
+                maven { url 'https://maven.google.com' }
+            }
         }
         ```
         
@@ -101,7 +101,7 @@ DSL은 Domain-Specific Language로써 특정 영역에 대한 연산 및 작업�
         
         // 변경
         tasks.register("clean", Delete::class) {
-        	delete(rootProject.buildDir)
+            delete(rootProject.buildDir)
         }
         ```
         
@@ -119,9 +119,9 @@ DSL은 Domain-Specific Language로써 특정 영역에 대한 연산 및 작업�
         
         // 변경
         plugins {
-        	id("com.android.application")
-        	id("com.google.gms.google-services")
-        	id("kotlin-android")
+            id("com.android.application")
+            id("com.google.gms.google-services")
+            id("kotlin-android")
         }
         ```
         
@@ -162,131 +162,130 @@ DSL은 Domain-Specific Language로써 특정 영역에 대한 연산 및 작업�
         ```kotlin
         // 기존
         compileOptions {
-        	sourceCompatibility JavaVersion.VERSION_1_8
-        	targetCompatibility JavaVersion.VERSION_1_8
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
         }
         
         // 변경 : Java 11로 올림
         compileOptions {
-        	sourceCompatibility = JavaVersion.VERSION_11
-        	targetCompatibility = JavaVersion.VERSION_11
+            sourceCompatibility = JavaVersion.VERSION_11
+            targetCompatibility = JavaVersion.VERSION_11
         }
         
         kotlinOptions {
-        	jvmTarget = "11"
+            jvmTarget = "11"
         }
         ```
         
-    7.   `productFlavors` 변경
+    7. `productFlavors` 변경
         
         ```kotlin
         // 기존
         productFlavors {
-        		dev {
-        		applicationIdSuffix ".dev"
-        		aaptOptions.cruncherEnabled = false
-        
-        		// Manifest 변수화 시 사용
-        		manifestPlaceholders = [appName   : "@string/app_name_dev"]
-        		// Build 변수
-        		buildConfigField('boolean', 'IS_RELEASE', "false")
-        	}
-        
-        	prod {
-        		// Manifest 변수화 시 사용
-        		manifestPlaceholders = [appName   : "@string/app_name_prod"]
-        		// Build 변수
-        		buildConfigField('boolean', 'IS_RELEASE', "true")
-        	}
+            dev {
+                applicationIdSuffix ".dev"
+                aaptOptions.cruncherEnabled = false
+                
+                // Manifest 변수화 시 사용
+                manifestPlaceholders = [appName   : "@string/app_name_dev"]
+                // Build 변수
+                buildConfigField('boolean', 'IS_RELEASE', "false")
+            }
+
+            prod {
+                // Manifest 변수화 시 사용
+                manifestPlaceholders = [appName   : "@string/app_name_prod"]
+                // Build 변수
+                buildConfigField('boolean', 'IS_RELEASE', "true")
+            }
         }
-        
         sourceSets {
-        	dev {
-        		java.srcDirs = ['src/main/java', 'src/dev/java']
-        	}
-        	prod {
-        		java.srcDirs = ['src/main/java', 'src/prod/java']
-        	}
+            dev {
+                java.srcDirs = ['src/main/java', 'src/dev/java']
+            }
+            prod {
+                java.srcDirs = ['src/main/java', 'src/prod/java']
+            }
         }
+
         // 변경
         productFlavors {
-        	create("dev") {
-        		dimension = "flavors"
-        		applicationIdSuffix = ".dev"
-        		aaptOptions.cruncherEnabled = false
+            create("dev") {
+                dimension = "flavors"
+                applicationIdSuffix = ".dev"
+                aaptOptions.cruncherEnabled = false
         
-        		// Manifest 변수화 시 사용
-        		manifestPlaceholders["appName"] = "@string/app_name_dev"
-        		// Build 변수
-        		buildConfigField("boolean", "IS_RELEASE", false.toString())
-        	}
+                // Manifest 변수화 시 사용
+                manifestPlaceholders["appName"] = "@string/app_name_dev"
+                // Build 변수
+                buildConfigField("boolean", "IS_RELEASE", false.toString())
+            }
+
+            create("prod") {
+                dimension = "flavors"
         
-        	create("prod") {
-        		dimension = "flavors"
-        
-        		// Manifest 변수화 시 사용
-        		manifestPlaceholders["appName"] = "@string/app_name_prod"
-        		// Build 변수
-        		buildConfigField("boolean", "IS_RELEASE", true.toString())
-        	}
+                // Manifest 변수화 시 사용
+                manifestPlaceholders["appName"] = "@string/app_name_prod"
+                // Build 변수
+                buildConfigField("boolean", "IS_RELEASE", true.toString())
+            }
         }
-        
         // Flavor에 따른 코드 분기 처리
         sourceSets {
-        	getByName("dev") {
-        		java.srcDirs("src/dev/java")
-        	}
-        	getByName("prod") {
-        		java.srcDirs("src/prod/java")
-        	}
+            getByName("dev") {
+                java.srcDirs("src/dev/java")
+            }
+            getByName("prod") {
+                java.srcDirs("src/prod/java")
+            }
         }
         ```
         
-    8.   `buildTypes` 변경
+    8. `buildTypes` 변경
         
         ```kotlin
         // 기존
         buildTypes {
-        	debug {
-        		signingConfig signingConfigs.debug
-        		zipAlignEnabled false
-        		minifyEnabled false
-        		shrinkResources false
-        		debuggable true
+            debug {
+                signingConfig signingConfigs.debug
+                zipAlignEnabled false
+                minifyEnabled false
+                shrinkResources false
+                debuggable true
         
-        		proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        	}
-        	release {
-        		signingConfig signingConfigs.release
-        		zipAlignEnabled true
-        		minifyEnabled true
-        		shrinkResources true
-        		debuggable false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
+            release {
+                signingConfig signingConfigs.release
+                zipAlignEnabled true
+                minifyEnabled true
+                shrinkResources true
+                debuggable false
         
-        		proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        	}
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
         }
         
         // 변경
         buildTypes {
-        	getByName("debug") {
-        		signingConfig = signingConfigs.getByName("debug")
-        		isMinifyEnabled = false
-        		isShrinkResources = false
-        		isDebuggable = true
+            getByName("debug") {
+                signingConfig = signingConfigs.getByName("debug")
+                isMinifyEnabled = false
+                isShrinkResources = false
+                isDebuggable = true
         
-        		proguardFile(getDefaultProguardFile("proguard-android.txt"))
-        		proguardFile(file("proguard-rules.pro"))
-        	}
-        	getByName("release") {
-        		signingConfig = signingConfigs.getByName("release")
-        		isMinifyEnabled = true
-        		isShrinkResources = true
-        		isDebuggable = false
+                proguardFile(getDefaultProguardFile("proguard-android.txt"))
+                proguardFile(file("proguard-rules.pro"))
+            }
+            getByName("release") {
+                signingConfig = signingConfigs.getByName("release")
+                isMinifyEnabled = true
+                isShrinkResources = true
+                isDebuggable = false
         
-        		proguardFile(getDefaultProguardFile("proguard-android.txt"))
-        		proguardFile(file("proguard-rules.pro"))
-        	}
+                proguardFile(getDefaultProguardFile("proguard-android.txt"))
+                proguardFile(file("proguard-rules.pro"))
+            }
         }
         ```
         
